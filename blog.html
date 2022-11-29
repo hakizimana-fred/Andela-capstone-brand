@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+     <button onclick="topFunction()" id="myBtn" title="Go to top">
+         <i class="fa fa-arrow-up" aria-hidden="true"></i>
+     </button>
+    <nav>
+        <div class="container">
+            <h1 class="navbar-brand">Fred.</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Skills</a></li>
+                <li><a href="">Work</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 style="text-align: center; font-weight: 700;">Blogs</h1>
+
+     <div class="container blog-container" id="blog-contents">
+        <div class="blog-card">
+            <div class="flex-between">
+                <img src="images/code.jpg" alt="">
+
+                <div class="article">
+                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
+                <div class="article-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
+                    <button class="btn btn-primary">Read more</button>
+                </div>
+            </div>
+            </div>
+        </div>
+           <div class="blog-card" id="blogs">
+            <div class="flex-between">
+                <img src="images/code.jpg" alt="">
+
+                <div class="article">
+                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
+                <div class="article-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
+                    <button class="btn btn-primary">Read more</button>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+           <div class="blog-card">
+            <div class="flex-between">
+                <img src="images/code.jpg" alt="">
+
+                <div class="article">
+                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
+                <div class="article-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
+                    <button class="btn btn-primary">Read more</button>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+     </div>
+    
+
+
+  <section class="contact flex-column">
+        <h1 class="text-md">Contact me</h1>
+        <p>if you have any interesting project hit my email</p> 
+        <button class="btn btn-email">hello@gmail.com</button>
+  </section>
+
+
+
+  <div class="footer-socials">
+    <div class="socials">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Fred &copy; <span id="year">2022</span></p>
+  </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedUser = JSON.parse(localStorage.getItem('mybrand'))
+        const blogContent = document.querySelector('#blog-contents')
+
+        if (savedUser === null) {
+            blogContent.classList.add('hidden') 
+            alert('You must login first')
+            return window.location="/login.html"
+        }else {
+            blogContent.classList.remove('hidden')
+        }
+    })
+</script>
+
+ <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="top-header">
+		<nav>
+		<div class="container">
+			<div class="right-nav">	
+				<ul>
+					<li><a href="">Dashboard</a></li>
+					<li><a href="">Blogs</a></li>
+				</ul>
+			</div>
+
+			<div class="left-nav">
+				<ul>					
+					<li><a href="">
+					<i class="fa-solid fa-user" style="font-size: 20px"></i>
+					Welcome Fred</a></li>
+					<li><a href="#" onclick="logout(this)">
+						<i class="fa-solid fa-right-from-bracket" style="font-size: 20px;"></i>
+					Logout</a></li>
+				</ul>
+			</div>
+		</div>
+		</nav>
+	</div>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1 style="color: white">
+		<i class="fa-sharp fa-solid fa-gears"></i>
+			Admin Area</h1>
+		</div>	
+	</div>
+
+	<div class="jumbotron gray">
+		<div class="container">
+			<button type="button" id="create-post" class="btn btn-primary">
+				<i class="fa-solid fa-plus" style="font-size: 20px"></i>
+			Create Blog </button>
+		</div>	
+	</div>
+
+     <div class="container flex">
+         <div class="card">
+            <h3>
+                <span><i class="fa fa-pencil fax-3" aria-hidden="true"></i></span>
+                
+            </h3>
+            <h1 id="posts-count">Posts <span></span></h1>
+        </div>
+          <div class="card">
+            <h3>
+                <span><i class="fa-solid fa-user fax-3" aria-hidden="true"></i></span>
+                
+            </h3>
+            <h1>Users <span>9</span></h1>
+        </div>
+          <div class="card">
+            <h3>
+                <span>
+                    <i class="fa-solid fa-users"></i>
+                </span>
+                
+            </h3>
+            <h1>Authors <span>1</span></h1>
+        </div>
+     </div>
+
+	 <div class="container flex">
+
+	 	 <table>
+        <thead>
+        <tr>
+            <th>Blog</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+     
+    </tbody>
+    </table>
+
+    <div class="blog-rates">
+    	<div class="card" style="background: #dc3545 !important;">
+    		<h3>
+    			<span>
+                    <i class="fa fa-trash" aria-hidden="true"></i>         
+                </span>
+    			
+    		</h3>
+    		<h1>Deleted Posts <span>2</span></h1>
+    		
+    		
+    	</div>
+    	
+    </div> 
+	</div>
+
+
+	  <div class="modal">
+      <div class="modal-box">
+        <div class="modal-body">
+          <form id="blog-form">
+            <div class="form-control">
+              <label for="email">Title</label>
+              <input id="title"  type="text"/>
+            </div>
+            <div class="form-control">
+              <label for="Author">Author</label>
+              <input type="text" id="author" />
+            </div>
+             <div class="form-control">
+              <label for="file">File</label>
+              <input type="file" id="password" />
+            </div>
+            <div id="editor" style="height: 50vh"></div>
+            <button type="submit" class="btn btn-dark">Post</button>
+          </form>
+        </div>
+         <div class="modal-footer">
+               
+            </div>
+            <img src="close.svg" alt="close" class="close">
+      </div>
+    </div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+<script src="main.js"></script>
+
+
+<script>
+  function logout() {
+    localStorage.removeItem('mybrand')
+    return window.location.href = "/login.html"
+  }
+</script>
+
+</body>
+</html>
