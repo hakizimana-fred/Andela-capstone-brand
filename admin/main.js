@@ -14,6 +14,22 @@ let myEditor
 
 
 
+let updateEditor
+
+
+      ClassicEditor
+                                .create( document.querySelector( '#update-editor' ) )
+                                .then( editor => {
+                                        console.log( editor.value);
+                                        updateEditor = editor
+
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+
+
+
 document.getElementById('create-post').addEventListener('click', () => {
     document.querySelector('.modal').style.display = 'block'
 })
@@ -22,8 +38,14 @@ document.querySelector('.close').addEventListener("click", () => {
     document.querySelector('.modal').style.display = 'none'
 })
 
+document.querySelector('.update-close').addEventListener("click", () => {
+    document.querySelector('.update-modal').style.display = 'none'
+})
+
+
 
 const blogForm = document.querySelector('#blog-form')
+const update = document.querySelector('#update-form')
 
 blogForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -44,22 +66,21 @@ const myBlog = {
 
 
 //localStorage.setItem('admin-blog', JSON.stringify(blogs))
+let blogs = []
 
 if (localStorage.getItem('admin-blog') ===  null) {
-    var blogs = []
-
     blogs.push(myBlog)
     localStorage.setItem('admin-blog', JSON.stringify(blogs))
 
 }else {
-    var blogs = JSON.parse(localStorage.getItem('admin-blog'))
-    blogs.push(myBlog)
-
-    localStorage.setItem('admin-blog', JSON.stringify(blogs))
+     blogs = JSON.parse(localStorage.getItem('admin-blog'))
+     blogs.push(myBlog)
+     localStorage.setItem('admin-blog', JSON.stringify(blogs))
 
 }
     // call getBlogs function after save
     getBlogs()
+    getBlogsLength()
 })
 
 
@@ -88,8 +109,8 @@ function getBlogs() {
                 <i class="fa-solid fa-trash"></i>
                 
             </button></td>
-              <td><button type="button" class="btn btn-sm btn-primary">
-                <i class="fa-solid fa-book-open-reader"></i>
+              <td><button id=${blog.blogId} onclick="updateBlog(this)" type="button" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-pencil"></i>
             </button></td>
         <tr>
         `
@@ -100,10 +121,12 @@ function getBlogs() {
 
 const postsCount = document.getElementById('posts-count')
 
-postsCount.innerHTML = JSON.parse(localStorage.getItem('admin-blog')).length
-
+function getBlogsLength(){
+    return postsCount.innerHTML = JSON.parse(localStorage.getItem('admin-blog')).length
+}
 
 getBlogs()
+getBlogsLength()
 
 
 function deleteBlog(e) {
@@ -113,8 +136,29 @@ function deleteBlog(e) {
     const deleted = blogPosts.filter(blog => blog.blogId !== blogId) 
     localStorage.setItem('admin-blog', JSON.stringify(deleted))
     getBlogs()    
+    getBlogsLength()
 }
 
+
+function updateBlog(e) {
+    const blogId = e.id
+    document.querySelector('.update-modal').style.display = 'block' 
+    const blogPosts = JSON.parse(localStorage.getItem('admin-blog')) 
+
+    update.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const title = document.getElementById('update-title').value
+        const author = document.getElementById('update-author').value  
+        const htmlParsed =  updateEditor.getData().replace(/<\/?[^>]+(>|$)/g, "")
+        const objIndex = blogPosts.findIndex((blog => blog.blogId == blogId));
+        blogPosts[objIndex].title = title
+        blogPosts[objIndex].author = author
+        blogPosts[objIndex].content = htmlParsed
+        localStorage.setItem('admin-blog', JSON.stringify(blogPosts))
+         getBlogs()
+
+    })
+}
 
 
 function viewBlog(e) {

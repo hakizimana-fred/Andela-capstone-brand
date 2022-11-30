@@ -93,19 +93,7 @@
     </table>
 
     <div class="blog-rates">
-    	<!-- <div class="card" style="background: #dc3545 !important;">
-    		<h3>
-    			<span>
-                    <i class="fa fa-trash" aria-hidden="true"></i>         
-                </span>
-    			
-    		</h3>
-    		<h1>Deleted Posts <span>2</span></h1>
-    		
-    		
-    	</div>
-    	
-    </div>  -->
+   
 	</div>
 
 
@@ -135,6 +123,36 @@
             <img src="close.svg" alt="close" class="close">
       </div>
     </div>
+
+
+    	<div class="update-modal">
+      <div class="modal-box">
+        <div class="modal-body">
+          <form id="update-form">
+            <div class="form-control">
+              <label for="email">Title</label>
+              <input id="update-title"  type="text"/>
+            </div>
+            <div class="form-control">
+              <label for="Author">Author</label>
+              <input type="text" id="update-author" />
+            </div>
+             <div class="form-control">
+              <label for="file">File</label>
+              <input type="file" id="password" />
+            </div>
+            <div id="update-editor" style="height: 50vh"></div>
+            <button type="submit" class="btn btn-dark">Post</button>
+          </form>
+        </div>
+         <div class="modal-footer">
+               
+            </div>
+            <img src="close.svg" alt="close" class="update-close">
+      </div>
+    </div>
+   
+    
 
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 <script src="main.js"></script>

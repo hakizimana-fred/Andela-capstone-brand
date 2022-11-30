@@ -192,6 +192,18 @@ i {
     background: rgba(0, 0, 0, 0.5)
 }
 
+.update-modal {
+   display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+
 
 .modal-box {
     margin: 10% auto;
@@ -220,7 +232,7 @@ i {
     color: #fff;
 }
 
-.modal .close {
+.modal .close, .update-modal .update-close {
     cursor: pointer;
     height: 23px;
     width: 23px;
@@ -228,6 +240,8 @@ i {
     top: 20px;
     right: 20px;
 }
+
+
 
 .modal .modal-footer {
     background: #f7f7f9;

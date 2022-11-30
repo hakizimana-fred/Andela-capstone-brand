@@ -111,11 +111,10 @@
 
         if (blogId !== "undefined") {
             const blogs = JSON.parse(localStorage.getItem('admin-blog'))
-
             const foundArticle = blogs.find(blog => blog.blogId === blogId)
 
             if (foundArticle) {
-               // insert Title 
+               // insert Blog content
                document.querySelector('.article-heading').innerHTML = foundArticle.title
                document.querySelector('.date').innerHTML = foundArticle.created
                document.querySelector('.content-article').innerHTML = foundArticle.content
