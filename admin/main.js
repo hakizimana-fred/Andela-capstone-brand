@@ -23,9 +23,6 @@ document.querySelector('.close').addEventListener("click", () => {
 })
 
 
-
-
-
 const blogForm = document.querySelector('#blog-form')
 
 blogForm.addEventListener('submit', (e) => {
@@ -41,7 +38,8 @@ const myBlog = {
     title,
     author,
     content: htmlParsed,
-    created: new Date()
+    created: new Date().toISOString().substring(0,10),
+    blogId: Math.random().toString(36).substring(2,10)
 }
 
 
@@ -60,10 +58,8 @@ if (localStorage.getItem('admin-blog') ===  null) {
     localStorage.setItem('admin-blog', JSON.stringify(blogs))
 
 }
-
+    // call getBlogs function after save
     getBlogs()
-
-
 })
 
 
@@ -85,7 +81,14 @@ function getBlogs() {
              <td>${blog.title}</td>
             <td>${blog.author}</td>
             <td>${blog.created}</td>
-            <td><button type="button" class="btn btn-sm btn-primary">
+            <td><button id=${blog.blogId} onclick="viewBlog(this)" type="button" class="btn btn-sm btn-primary">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </button></td>
+             <td><button id=${blog.blogId} type="button" class="btn btn-sm btn-primary"  onclick="deleteBlog(this)">
+                <i class="fa-solid fa-trash"></i>
+                
+            </button></td>
+              <td><button type="button" class="btn btn-sm btn-primary">
                 <i class="fa-solid fa-book-open-reader"></i>
             </button></td>
         <tr>
@@ -101,3 +104,24 @@ postsCount.innerHTML = JSON.parse(localStorage.getItem('admin-blog')).length
 
 
 getBlogs()
+
+
+function deleteBlog(e) {
+    alert("are you sure you sure?")
+    const blogId = e.id
+    const blogPosts = JSON.parse(localStorage.getItem('admin-blog'))
+    const deleted = blogPosts.filter(blog => blog.blogId !== blogId) 
+    localStorage.setItem('admin-blog', JSON.stringify(deleted))
+    getBlogs()    
+}
+
+
+
+function viewBlog(e) {
+    const blogId = e.id
+    const query = blogId
+    window.location.href=`../articles.html?id=${blogId}`
+
+}
+
+

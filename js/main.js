@@ -71,6 +71,8 @@ if (contactForm && contactForm !== "undefined") {
 
 }
 
+let brandUsers = []
+
 if (signupForm && signupForm !== "undefined") {
         // register form submission
  signupForm.addEventListener('submit', async function(e){
@@ -90,20 +92,30 @@ if (signupForm && signupForm !== "undefined") {
                 name, 
                 email,
                 password
-            }
-        
-        // check if user exists
-        const savedUser = JSON.parse(localStorage.getItem('mybrand')) || {}
-        if (savedUser.email === email) {
-            alert('user already exists')
-            window.location.href ="/login.html"
-        }else {
-            // Set user hakifred20@gmail.com as Admin
-            email === "hakifred20@gmail.com" ? newUser.role = "admin" : newUser.role = "user"
-            localStorage.setItem('mybrand', JSON.stringify(newUser))
-            alert('Registered successfully')
-            window.location.href="/login.html"
-        }
+            }        
+
+            if (localStorage.getItem('brand-users') === null) {
+                email === "hakifred20@gmail.com" ? newUser.role = "admin" : newUser.role = "user"
+                brandUsers.push(newUser)
+                localStorage.setItem('brand-users', JSON.stringify(brandUsers))
+                alert('Registered successfully!')
+                window.location.href="/login.html"
+            }else {
+                brandUsers = JSON.parse(localStorage.getItem('brand-users'))
+                email === "hakifred20@gmail.com" ? newUser.role = "admin" : newUser.role = "user"
+                // loop through users to see if user already exists
+                for (let user of brandUsers) {
+                    if (user.email === email) {
+                        alert('user already exists!')
+                        return false
+                    }
+
+                } 
+                brandUsers.push(newUser)
+                localStorage.setItem('brand-users', JSON.stringify(brandUsers))
+                alert('Registered successfully!')
+                window.location.href="/login.html"
+            } 
 })
 }
 
@@ -120,18 +132,22 @@ if (loginForm && loginForm !== "undefined") {
                 return
             }
        
-        // Get password stored in local storage
-        const savedUser = JSON.parse(localStorage.getItem('mybrand')) || {}
-        if (savedUser && savedUser.password === password) {
-            // check if it's user is admin
-            if (savedUser.role === "admin")  {
-                window.location.href="/admin/index.html"
+        // Get password stored in local storage 
+        const savedUsers = JSON.parse(localStorage.getItem('brand-users')) 
+        const foundUser = savedUsers.find(user => user.email === email)
+        // find out if a user exist 
+        if (foundUser) {
+            // check if password match
+            if (foundUser.password === password) {
+                localStorage.setItem('user-loggedin', true)
+                if (foundUser.role === "admin") return window.location.href="/admin/index.html"
+                return window.location.href="/blog.html"
             }else {
-                window.location.href="/blog.html"
+                alert('passwords do not match!')
             }
         }else {
-            alert("passwords don't match")
-        }      
+            alert('user does not exist')
+        } 
 })
 
 }

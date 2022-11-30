@@ -34,18 +34,16 @@
                  <img src="images/code.jpg" alt="">
 
               <div class="article">
-                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
+                <h1 class="article-heading"></h1>
                 <div class="article-content">
-                    <span>Date Nov</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
+                    <span class="date"></span>
                   
                 </div>
             </div>
             </div>
 
             <div class="article-content" style="padding-bottom: 50px">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quos soluta ipsam repudiandae numquam. Illum, cum porro eligendi tempore necessitatibus eaque quod dolorem temporibus reiciendis qui eveniet illo possimus nesciunt ea libero ad odio repudiandae autem dolores id, dicta ipsa neque soluta? Nemo nobis et ea officiis labore ex dicta nihil nam quas quidem? Voluptate necessitatibus id quasi amet omnis aspernatur, perspiciatis voluptatum, excepturi modi accusamus nostrum vero fugiat? Rem consectetur ducimus quam, optio consequatur adipisci autem unde, explicabo, temporibus consequuntur minima deleniti! Laudantium, ex assumenda? Doloribus blanditiis possimus eaque molestias consequatur, rem maxime, optio voluptatibus ex omnis, vitae sunt.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, necessitatibus placeat ullam vero dignissimos aspernatur qui, eveniet rem sed, ducimus expedita nisi sapiente illo! Quam quis magnam quod, non exercitationem voluptates fugit culpa quibusdam, ipsa illo rerum vero dolores, commodi facilis cupiditate nesciunt! Sunt sequi quae provident error mollitia quod facilis laborum rem. Minus aperiam ipsam voluptas molestias deserunt dolores, eligendi quaerat impedit magnam repellat? Voluptates vitae iste explicabo incidunt adipisci. Sequi quod est rem eos consequuntur, accusantium odio magnam commodi voluptatibus deserunt! Dicta amet sit itaque sequi sint eaque. Molestias maiores possimus saepe laborum laboriosam cupiditate maxime ut eos.</p>
+                <p class="content-article"></p>
             </div>
 
             <div class="article-actions flex">
@@ -104,6 +102,31 @@
   <footer class="footer">
     <p>Fred &copy; <span id="year">2022</span></p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const idQuery = window.location.search
+        const urlParams = new URLSearchParams(idQuery)
+        const blogId = urlParams.get('id')
+
+        if (blogId !== "undefined") {
+            const blogs = JSON.parse(localStorage.getItem('admin-blog'))
+
+            const foundArticle = blogs.find(blog => blog.blogId === blogId)
+
+            if (foundArticle) {
+               // insert Title 
+               document.querySelector('.article-heading').innerHTML = foundArticle.title
+               document.querySelector('.date').innerHTML = foundArticle.created
+               document.querySelector('.content-article').innerHTML = foundArticle.content
+            }
+
+        }else{
+            return window.history.back()
+        }
+
+    })
+  </script>
 
  <script src="js/main.js"></script>
 </body>

@@ -98,10 +98,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const savedUser = JSON.parse(localStorage.getItem('mybrand'))
+        const savedUser = JSON.parse(localStorage.getItem('user-loggedin'))
         const blogContent = document.querySelector('#blog-contents')
 
-        if (savedUser === null) {
+        if (!savedUser) {
             blogContent.classList.add('hidden') 
             alert('You must login first')
             return window.location="/login.html"

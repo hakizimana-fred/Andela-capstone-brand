@@ -73,6 +73,17 @@
     <p>Fred &copy; <span id="year">2022</span></p>
   </footer>
 
+  <script>
+     document.addEventListener('DOMContentLoaded', () => {
+        const savedUser = JSON.parse(localStorage.getItem('user-loggedin'))
+        if (!savedUser) {
+            return window.location="/register.html"
+        }else {
+            window.history.back()
+        }
+    })
+  </script>
+
  <script src="js/main.js"></script>
 </body>
 </html>
