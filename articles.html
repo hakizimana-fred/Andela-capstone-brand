@@ -18,10 +18,10 @@
             <h1 class="navbar-brand">Fred.</h1>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Skills</a></li>
-                <li><a href="">Work</a></li>
-                <li><a href="">Blog</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#work">Work</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
@@ -31,7 +31,7 @@
     <div class="container">
         <div class="article-card" style="background: #F4F5F5 !important">
             <div class="flex-between" style="padding-bottom: 50px">
-                 <img src="images/code.jpg" alt="">
+                 <img  id="blog-img" alt="">
 
               <div class="article">
                 <h1 class="article-heading"></h1>
@@ -118,6 +118,8 @@
                document.querySelector('.article-heading').innerHTML = foundArticle.title
                document.querySelector('.date').innerHTML = foundArticle.created
                document.querySelector('.content-article').innerHTML = foundArticle.content
+               document.querySelector('#blog-img').src = foundArticle.imgUrl
+
             }
 
         }else{

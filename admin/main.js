@@ -45,7 +45,23 @@ document.querySelector('.update-close').addEventListener("click", () => {
 
 
 const blogForm = document.querySelector('#blog-form')
+const blogImg = document.querySelector('#blog-img')
 const update = document.querySelector('#update-form')
+
+let blogimgUrl = ''
+
+blogImg.addEventListener('change', () => {
+    const fr = new FileReader()
+    fr.readAsDataURL(blogImg.files[0])
+
+    fr.addEventListener('load', () => {
+        const url = fr.result
+        blogimgUrl = url
+    })
+})
+
+console.log(blogimgUrl)
+
 
 blogForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -61,7 +77,8 @@ const myBlog = {
     author,
     content: htmlParsed,
     created: new Date().toISOString().substring(0,10),
-    blogId: Math.random().toString(36).substring(2,10)
+    blogId: Math.random().toString(36).substring(2,10),
+    imgUrl: blogImg !== '' ? blogimgUrl : null
 }
 
 

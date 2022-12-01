@@ -31,47 +31,8 @@
     <h1 style="text-align: center; font-weight: 700;">Blogs</h1>
 
      <div class="container blog-container" id="blog-contents">
-        <div class="blog-card">
-            <div class="flex-between">
-                <img src="images/code.jpg" alt="">
-
-                <div class="article">
-                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
-                <div class="article-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
-                    <button class="btn btn-primary">Read more</button>
-                </div>
-            </div>
-            </div>
-        </div>
-           <div class="blog-card" id="blogs">
-            <div class="flex-between">
-                <img src="images/code.jpg" alt="">
-
-                <div class="article">
-                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
-                <div class="article-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
-                    <button class="btn btn-primary">Read more</button>
-                </div>
-            </div>
-            </div>
-            
-        </div>
-           <div class="blog-card">
-            <div class="flex-between">
-                <img src="images/code.jpg" alt="">
-
-                <div class="article">
-                <h1 class="article-heading">Lorem ipsum dolor sit amet.</h1>
-                <div class="article-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae optio, sed, sint doloremque, iste quibusdam eveniet reprehenderit ipsum qui ipsa minus id praesentium eligendi labore saepe deleniti voluptatibus. Eveniet, facere?</p>
-                    <button class="btn btn-primary">Read more</button>
-                </div>
-            </div>
-            </div>
-            
-        </div>
+      
+        
      </div>
     
 
@@ -108,7 +69,40 @@
         }else {
             blogContent.classList.remove('hidden')
         }
+
+        // access blogs from locastorage
+        const blogs = JSON.parse(localStorage.getItem('admin-blog'))
+        let output = ``
+        if (blogs.length > 0) {
+            blogs.forEach(blog => {
+                output += `
+
+        <div class="blog-card">
+            <div class="flex-between">
+                <img src=${blog.imgUrl} alt="">
+
+                <div class="article">
+                <h1 class="article-heading">${blog.title}</h1>
+                <div class="article-content">
+                    <p>${blog.content}</p>
+                    <button class="btn btn-primary" id=${blog.blogId} onclick="redirect(this)">Read more</button>
+                </div>
+            </div>
+            </div>
+         </div>
+                `
+            })
+        }
+
+        blogContent.innerHTML = output
     })
+
+
+    function redirect(e) {
+        const blogId = e.id
+        window.location.href=`/articles.html?id=${blogId}`
+    }
+
 </script>
 
  <script src="js/main.js"></script>
