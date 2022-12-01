@@ -98,7 +98,8 @@ if (signupForm && signupForm !== "undefined") {
             const newUser = {
                 name, 
                 email,
-                password
+                password,
+                userId: Math.random().toString(36).substring(2,10),
             }        
 
             if (localStorage.getItem('brand-users') === null) {
@@ -151,7 +152,16 @@ if (loginForm && loginForm !== "undefined") {
         if (foundUser) {
             // check if password match
             if (foundUser.password === password) {
+                const {name, email, userId} = foundUser
+                const userLoggedIn = {
+                    name,
+                    email, 
+                    userId,
+                    isLoggedIn: true
+                }
                 localStorage.setItem('user-loggedin', true)
+                localStorage.setItem('loggedin-user', JSON.stringify(userLoggedIn))
+
                 if (foundUser.role === "admin") return window.location.href="/admin/index.html"
                 return window.location.href="/blog.html"
             }else {

@@ -46,34 +46,31 @@
                 <p class="content-article"></p>
             </div>
 
-            <div class="article-actions flex">
+            <!-- <div class="article-actions flex">
                 <span style="margin-right: 40px;"><i class="fa-solid fa-heart" style="color: #F36D6D"></i>2</span>
                 <span><i class="fa-solid fa-comment"></i>3</span>
-            </div>
+            </div> -->
 
             <div  style="width: 100%; border: 1px solid #D7D7D7; "></div>
 
             <div class="comment-form">
-                <form action="" id="comment-form">
-                    <div class="form-control">
-                        <input type="text" placeholder="title" name="title" id="title">
-                    </div>
+                <form action="" id="comment-form"> 
                      <div class="form-control">
                         <textarea name="comment" placeholder="comment" id="comment"></textarea>
                     </div>
-                    <button class="btn btn-primary">Post</button>
+                    <button class="btn btn-primary" type="submit">Post</button>
                 </form>
             </div>
 
-            <div class="comments-count">3 comments</div>
+            <div class="comments-count"></div>
             <div  style="width: 100%; border: 1px solid #D7D7D7; "></div>
 
             <div class="comments flex">
-                <div class="subtr-name" style="margin-right: 30px;">NS</div>
+               
                 <div>
-                 <h4>Fred</h4>
+                
                  <div class="comments-content">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque quidem dolor unde veritatis aliquid, autem quia pariatur voluptatum magnam vero nulla ducimus dolores nam, accusantium non debitis nostrum voluptate molestias!</p>
+                
                 </div>
                 </div>
 
@@ -125,8 +122,69 @@
         }else{
             return window.history.back()
         }
+        fetchComments()
 
     })
+
+
+    let comments = []
+    document.querySelector('.comment-form').addEventListener('submit', (e) => {
+        e.preventDefault()
+        const idQuery = window.location.search
+        const urlParams = new URLSearchParams(idQuery)
+        const blogId = urlParams.get('id')
+
+        const commentArea = document.querySelector('#comment').value
+        const user = JSON.parse(localStorage.getItem('loggedin-user')) || {}
+
+        const comment = {
+            blogId,
+            comment: commentArea,
+            name:  user?.name,
+            created: new Date().toISOString().substring(0,10),
+        }
+
+       if (localStorage.getItem('brand-comments') === null) {
+          comments.push(comment)
+          localStorage.setItem('brand-comments', JSON.stringify(comments))
+       }else {
+            comments = JSON.parse(localStorage.getItem('brand-comments'))
+            comments.push(comment)
+            localStorage.setItem('brand-comments', JSON.stringify(comments))
+       } 
+
+       fetchComments()
+       
+    })
+
+
+    function fetchComments() {
+        const idQuery = window.location.search
+        const urlParams = new URLSearchParams(idQuery)
+        const blogId = urlParams.get('id')
+
+        const comments = JSON.parse(localStorage.getItem('brand-comments'))
+        const commentsContent = document.querySelector('.comments-content')
+        let output = '' 
+
+
+        if (comments.length > 0) {
+            comments.forEach(comment => {
+                if (comment.blogId === blogId) {
+                    output += `
+                        <div style="width: 100%">
+                            <h1 style="font-weight:600;">${comment.name}</h1>
+                            <p>${comment.comment}</p>
+                            <span>${comment.created}</span>
+                        </div>
+                    `
+                }
+            })
+            commentsContent.innerHTML = output
+        }
+
+    }
+
   </script>
 
  <script src="js/main.js"></script>
