@@ -87,12 +87,10 @@
   <script>
      document.addEventListener('DOMContentLoaded', () => {
         const savedUser = JSON.parse(localStorage.getItem('user-loggedin'))
-        if (!savedUser) {
-            return window.location="/login.html"
-        }else {
-            window.history.back()
-        }
+        if (savedUser) return window.history.back()
     })
+
+
   </script>
   
  <script src="js/main.js"></script>

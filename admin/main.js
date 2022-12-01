@@ -83,6 +83,11 @@ if (localStorage.getItem('admin-blog') ===  null) {
     getBlogsLength()
 })
 
+function getUsersLength() {
+    return document.querySelector('#users-length').innerHTML = JSON.parse(localStorage.getItem('brand-users')).length
+}
+
+getUsersLength()
 
 
 function getBlogs() {
@@ -163,7 +168,6 @@ function updateBlog(e) {
 
 function viewBlog(e) {
     const blogId = e.id
-    const query = blogId
     window.location.href=`../articles.html?id=${blogId}`
 
 }
