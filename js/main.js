@@ -42,7 +42,13 @@ if (contactForm && contactForm !== "undefined") {
 
             //simple validation
             if (!name || !email || !message) {
-                alert("All fieds are required")
+                   document.querySelector('.warning').classList.add('show')
+                  document.querySelector('.warning').innerHTML = "All fields are required" 
+
+                  setTimeout(() => {
+                   document.querySelector('.warning').classList.remove('show')
+                  }, 2000)
+                  return
             }
 
             const data = new FormData(e.target)
@@ -84,7 +90,8 @@ if (signupForm && signupForm !== "undefined") {
             ]
             //simple validation
             if (!name || !email || !password) {
-                alert("All fieds are required")
+                  document.querySelector('.warning').classList.add('show')
+                  document.querySelector('.warning').innerHTML = "All fields are required" 
                 return
             }
 
@@ -106,7 +113,11 @@ if (signupForm && signupForm !== "undefined") {
                 // loop through users to see if user already exists
                 for (let user of brandUsers) {
                     if (user.email === email) {
-                        alert('user already exists!')
+                           document.querySelector('.warning').classList.add('show')
+                            document.querySelector('.warning').innerHTML = "User already exists"
+                            setTimeout(() => { 
+                            document.querySelector('.warning').classList.remove('show')
+                          }, 2000)
                         return false
                     }
 
@@ -128,12 +139,13 @@ if (loginForm && loginForm !== "undefined") {
             ]
             //simple validation
             if (!email || !password) {
-                alert("All fieds are required")
+                document.querySelector('.warning').classList.add('show')
+                document.querySelector('.warning').innerHTML = "All fields are required" 
                 return
             }
-       
+            document.querySelector('.warning').classList.remove('show') 
         // Get password stored in local storage 
-        const savedUsers = JSON.parse(localStorage.getItem('brand-users')) 
+        const savedUsers = JSON.parse(localStorage.getItem('brand-users'))
         const foundUser = savedUsers.find(user => user.email === email)
         // find out if a user exist 
         if (foundUser) {
@@ -143,10 +155,18 @@ if (loginForm && loginForm !== "undefined") {
                 if (foundUser.role === "admin") return window.location.href="/admin/index.html"
                 return window.location.href="/blog.html"
             }else {
-                alert('passwords do not match!')
+                document.querySelector('.warning').classList.add('show')
+                document.querySelector('.warning').innerHTML = "Passwords do not match"
+                setTimeout(() => { 
+                    document.querySelector('.warning').classList.remove('show')
+                }, 2000)
             }
         }else {
-            alert('user does not exist')
+                document.querySelector('.warning').classList.add('show')
+                document.querySelector('.warning').innerHTML = "User does  not exist"
+                  setTimeout(() => { 
+                    document.querySelector('.warning').classList.remove('show')
+                }, 2000)
         } 
 })
 
