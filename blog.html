@@ -23,7 +23,7 @@
                 <li><a href="">Work</a></li>
                 <li><a href="">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="login.html" class="login-user">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -73,7 +73,7 @@
         // access blogs from locastorage
         const blogs = JSON.parse(localStorage.getItem('admin-blog'))
         let output = ``
-        if (blogs.length > 0) {
+        if (blogs !== null && blogs.length > 0) {
             blogs.forEach(blog => {
                 output += `
 

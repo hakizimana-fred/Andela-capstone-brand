@@ -3,6 +3,26 @@ const contactForm = document.querySelector('#contact-form')
 const signupForm = document.querySelector('#signup-form')
 const loginForm = document.querySelector('#login-form')
 const hamburgerMenu = document.querySelector('.menu-btn')
+const loggedIn = document.querySelector('.login-user')
+const nav = document.querySelector('nav')
+
+
+if (localStorage.getItem('user-loggedin')) {
+    const parentEl = loggedIn.parentNode
+    const button = document.createElement('button')
+    button.className = 'btn btn-logout'
+    const textNode = document.createTextNode('Logout')
+    button.addEventListener('click', logout)
+    button.appendChild(textNode)
+    parentEl.insertBefore(button, loggedIn.nextSibling)
+    loggedIn.remove()
+
+}
+
+function logout() {
+    localStorage.removeItem('user-loggedin')
+    window.location.reload()
+}
 
 
 if (btnScrollTop && btnScrollTop !== "undefined") {
@@ -63,10 +83,14 @@ if (contactForm && contactForm !== "undefined") {
                 })
 
                 if (response.ok) {
-                    alert('Message sent successfully')
+                    document.querySelector('.warning').classList.add('show')
+                    document.querySelector('.warning').innerHTML = "Message sent successfully" 
+
                     this.reset() 
                 }else {
-                    alert('something went wrong')
+                    document.querySelector('.warning').classList.add('show')
+                    document.querySelector('.warning').innerHTML = "Something went wrong" 
+
                 }
 
             }catch(err) {
@@ -106,8 +130,15 @@ if (signupForm && signupForm !== "undefined") {
                 email === "hakifred20@gmail.com" ? newUser.role = "admin" : newUser.role = "user"
                 brandUsers.push(newUser)
                 localStorage.setItem('brand-users', JSON.stringify(brandUsers))
-                alert('Registered successfully!')
-                window.location.href="/login.html"
+
+                const userLoggedIn = {
+                    ...newUser,
+                    isLoggedIn: true
+                }
+               
+                localStorage.setItem('user-loggedin', true)
+                localStorage.setItem('loggedin-user', JSON.stringify(userLoggedIn))
+                email === "hakifred20@gmail.com" ? window.location.href="/admin/index.html" : window.location.href="/blog.html"
             }else {
                 brandUsers = JSON.parse(localStorage.getItem('brand-users'))
                 email === "hakifred20@gmail.com" ? newUser.role = "admin" : newUser.role = "user"
@@ -125,8 +156,13 @@ if (signupForm && signupForm !== "undefined") {
                 } 
                 brandUsers.push(newUser)
                 localStorage.setItem('brand-users', JSON.stringify(brandUsers))
-                alert('Registered successfully!')
-                window.location.href="/login.html"
+                const userLoggedIn = {
+                    ...newUser,
+                    isLoggedIn: true
+                }
+                 localStorage.setItem('user-loggedin', true)
+                 localStorage.setItem('loggedin-user', JSON.stringify(userLoggedIn))
+                 email === "hakifred20@gmail.com" ? window.location.href="/admin/index.html" : window.location.href="/blog.html"
             } 
 })
 }
@@ -166,7 +202,7 @@ if (loginForm && loginForm !== "undefined") {
                 return window.location.href="/blog.html"
             }else {
                 document.querySelector('.warning').classList.add('show')
-                document.querySelector('.warning').innerHTML = "Passwords do not match"
+                document.querySelector('.warning').innerHTML = "Invalid credentials"
                 setTimeout(() => { 
                     document.querySelector('.warning').classList.remove('show')
                 }, 2000)

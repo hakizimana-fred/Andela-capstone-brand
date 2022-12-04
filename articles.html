@@ -23,7 +23,7 @@
                 <li><a href="index.html#work">Work</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="login.html" class="login-user">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -46,10 +46,10 @@
                 <p class="content-article"></p>
             </div>
 
-            <!-- <div class="article-actions flex">
-                <span style="margin-right: 40px;"><i class="fa-solid fa-heart" style="color: #F36D6D"></i>2</span>
-                <span><i class="fa-solid fa-comment"></i>3</span>
-            </div> -->
+            <div class="article-actions flex">
+                <button class="btn" type="button"  onclick="like()"><span style="margin-right: 40px;"><i class="fa-solid fa-heart" style="color: #F36D6D; font-size: 20px;"></i></span><span class="like"></span></button>
+               
+            </div>
 
             <div  style="width: 100%; border: 1px solid #D7D7D7; "></div>
 
@@ -184,6 +184,63 @@
         }
 
     }
+
+    let likes = []
+
+    function like() {
+        const idQuery = window.location.search
+        const urlParams = new URLSearchParams(idQuery)
+        const blogId = urlParams.get('id')
+
+        const loggedinUser = JSON.parse(localStorage.getItem('loggedin-user')) || {}
+        const likedBlog = {
+            blogId,
+            userId: loggedinUser?.userId
+
+        }
+
+        if (JSON.parse(localStorage.getItem('brand-likes')) === null) {
+            likes.push(likedBlog)
+            localStorage.setItem('brand-likes', JSON.stringify(likes))
+        }else {
+            likes = JSON.parse(localStorage.getItem('brand-likes'))
+             for (userlike of likes) {
+                if (userlike.userId === loggedinUser.userId) {
+                    const unliked = likes.filter(userliked => userliked.userId !== loggedinUser.userId)
+                    localStorage.setItem('brand-likes', JSON.stringify(unliked))
+                    fetchLikes()
+                    return false
+                }
+             }
+            likes.push(likedBlog)
+            localStorage.setItem('brand-likes', JSON.stringify(likes))
+        }        
+
+        fetchLikes()
+    }
+
+
+    function fetchLikes() {
+        const idQuery = window.location.search
+        const urlParams = new URLSearchParams(idQuery)
+        const blogId = urlParams.get('id')
+        const likes = JSON.parse(localStorage.getItem('brand-likes'))
+        const likesLength =  []
+        const likedEl = document.querySelector('.like')
+        
+        likes.forEach(like => {
+            if (like.blogId === blogId) {
+                likesLength.push(like)
+            }
+        })
+
+        likedEl.innerHTML = likesLength.length
+
+    }
+
+    fetchLikes()
+
+
 
   </script>
 

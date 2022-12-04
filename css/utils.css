@@ -121,3 +121,7 @@
 .show {
     display: block;
 }
+
+.btn-logout {
+    padding: 5px 10px;
+}

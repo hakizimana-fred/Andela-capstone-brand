@@ -60,7 +60,6 @@ blogImg.addEventListener('change', () => {
     })
 })
 
-console.log(blogimgUrl)
 
 
 blogForm.addEventListener('submit', (e) => {

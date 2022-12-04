@@ -157,8 +157,18 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 <script src="main.js"></script>
 
-
 <script>
+
+// check if user is admin else bounce back
+function checkUser() {
+   if (JSON.parse(localStorage.getItem('loggedin-user')) !== null) {
+      const loggedUser = JSON.parse(localStorage.getItem('loggedin-user'))
+      if (loggedUser.email !== "hakifred20@gmail.com") return window.history.back()
+   }
+}
+
+checkUser()
+
   function logout() {
     localStorage.removeItem('user-loggedin')
     return window.location.href = "/login.html"
