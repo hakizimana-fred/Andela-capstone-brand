@@ -442,4 +442,27 @@ nav .container ul li {
     .menu-btn {
         right: 10px;
     }
+
+.blog-card  {
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    padding: 40px;
+    margin: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+    width: 23%;
+}
+.blog-card .flex-between img {
+    width: 180px;
+}
+.blog-card h1 {
+    font-size: 15px;
+}
+.blog-card button {
+    padding: 5px 10px
+}
+.article-card {
+    width: 20%;
+}
 }
