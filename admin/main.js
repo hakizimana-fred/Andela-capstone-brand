@@ -109,6 +109,12 @@ function getUsersLength() {
 
 getUsersLength()
 
+const comments = JSON.parse(localStorage.getItem('brand-comments'))
+
+if (comments.length > 0) {
+    document.querySelector('#comments').innerHTML = comments.length
+}
+
 
 function getBlogs() {
     const tableBody = document.querySelector('#table-body')
