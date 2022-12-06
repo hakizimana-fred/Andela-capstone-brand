@@ -329,3 +329,18 @@ table {
         }
 
 }
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.warning {
+    padding: 10px;
+    text-align: center;
+    background: #dc3545;    
+    color: #fff;
+}

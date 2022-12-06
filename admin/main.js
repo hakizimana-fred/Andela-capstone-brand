@@ -70,7 +70,15 @@ const author = document.getElementById('author').value
 const htmlParsed =  myEditor.getData().replace(/<\/?[^>]+(>|$)/g, "")
 
 if (!title ||  !author || !htmlParsed) {
-    alert('cannot submit empty blog')
+     document.querySelector('.warning').classList.add('show')
+    document.querySelector('.warning').innerHTML = "Cannot post empty fields" 
+    document.querySelector('.modal').style.display = 'none'
+
+
+                  setTimeout(() => {
+                   document.querySelector('.warning').classList.remove('show')
+                }, 3000)
+                  return
 }
 
 // save to locastorage
