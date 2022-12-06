@@ -50,6 +50,14 @@ function topFunction() {
 }
 
 
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
     // contact form submission
 if (contactForm && contactForm !== "undefined") {
      contactForm.addEventListener('submit', async function(e){
@@ -64,6 +72,15 @@ if (contactForm && contactForm !== "undefined") {
             if (!name || !email || !message) {
                    document.querySelector('.warning').classList.add('show')
                   document.querySelector('.warning').innerHTML = "All fields are required" 
+
+                  setTimeout(() => {
+                   document.querySelector('.warning').classList.remove('show')
+                  }, 2000)
+                  return
+            }
+            if (!validateEmail(email)) {
+                  document.querySelector('.warning').classList.add('show')
+                  document.querySelector('.warning').innerHTML = "Invalid email" 
 
                   setTimeout(() => {
                    document.querySelector('.warning').classList.remove('show')
@@ -117,6 +134,16 @@ if (signupForm && signupForm !== "undefined") {
                   document.querySelector('.warning').classList.add('show')
                   document.querySelector('.warning').innerHTML = "All fields are required" 
                 return
+            }
+
+             if (!validateEmail(email)) {
+                  document.querySelector('.warning').classList.add('show')
+                  document.querySelector('.warning').innerHTML = "Invalid email" 
+
+                  setTimeout(() => {
+                   document.querySelector('.warning').classList.remove('show')
+                  }, 2000)
+                  return
             }
 
             const newUser = {
@@ -180,6 +207,17 @@ if (loginForm && loginForm !== "undefined") {
                 document.querySelector('.warning').innerHTML = "All fields are required" 
                 return
             }
+             if (!validateEmail(email)) {
+                  document.querySelector('.warning').classList.add('show')
+                  document.querySelector('.warning').innerHTML = "Invalid email" 
+
+                  setTimeout(() => {
+                   document.querySelector('.warning').classList.remove('show')
+                  }, 2000)
+                  return
+            }
+
+
             document.querySelector('.warning').classList.remove('show') 
         // Get password stored in local storage 
         const savedUsers = JSON.parse(localStorage.getItem('brand-users'))

@@ -69,6 +69,10 @@ const title = document.getElementById('title').value
 const author = document.getElementById('author').value
 const htmlParsed =  myEditor.getData().replace(/<\/?[^>]+(>|$)/g, "")
 
+if (!title ||  !author || !htmlParsed) {
+    alert('cannot submit empty blog')
+}
+
 // save to locastorage
 
 const myBlog = {
