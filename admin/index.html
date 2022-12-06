@@ -167,7 +167,13 @@ function checkUser() {
    }
 }
 
+function checkloggedIn() {
+   const savedUser = JSON.parse(localStorage.getItem('user-loggedin'))
+    if (!savedUser) return window.location.href="../login.html"
+}
+
 checkUser()
+checkloggedIn()
 
   function logout() {
     localStorage.removeItem('user-loggedin')

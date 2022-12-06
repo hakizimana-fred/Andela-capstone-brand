@@ -119,6 +119,10 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+         const savedUser = JSON.parse(localStorage.getItem('user-loggedin'))
+        if (!savedUser) return window.location.href="/login.html"
+
         const idQuery = window.location.search
         const urlParams = new URLSearchParams(idQuery)
         const blogId = urlParams.get('id')
